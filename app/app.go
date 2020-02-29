@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 
+	userscontroller "github.com/ajangi/gAuthService/app/controllers/users"
 	"github.com/ajangi/gAuthService/app/utils/responses"
 	"github.com/labstack/echo"
 )
@@ -13,7 +14,8 @@ func main() {
 		return c.JSON(http.StatusNotFound, errorResponse)
 	}
 	e := echo.New()
-	usersGroup := e.Group("/users")
-	usersGroup.POST("", nil)
+	v1ApiGroup := e.Group("/api/v1")
+	usersGroup := v1ApiGroup.Group("/users")
+	usersGroup.POST("/getCode", userscontroller.GetVerificationCode)
 	e.Logger.Fatal(e.Start(":8020"))
 }
