@@ -1,0 +1,46 @@
+version: '3.7'
+services: 
+    go-auth-app:
+        build: 
+            context: .
+            dockerfile: Dockerfile
+        container_name: goAuthApp
+        restart: unless-stopped
+        tty: true
+        ports: 
+            - "8020:8020"
+        networks: 
+            - gauth_service_network
+    go-auth-db:
+        image: mysql:5.7
+        container_name: goAuthDB # Database service container name
+        restart: unless-stopped
+        tty: true
+        ports:
+          - "33061:3306"
+        environment:
+          MYSQL_DATABASE: go_auth_db
+          MYSQL_ROOT_PASSWORD: toor
+          SERVICE_TAGS: dev
+          SERVICE_NAME: mysql
+        volumes:
+          - ./dbdata:/var/lib/mysql
+          - ./mysql/data:/data
+        networks:
+          - gauth_service_network
+    go-auth-nginx:
+        image: nginx:alpine
+        container_name: goAuthNginx
+        restart: unless-stopped
+        tty: true
+        volumes: 
+            - ./default.conf:/etc/nginx/conf.d/default.conf
+        ports: 
+            - "80:80"
+        networks: 
+            - gauth_service_network
+        depends_on: 
+            - go-auth-app
+networks: 
+    gauth_service_network:
+        driver: bridge
