@@ -18,3 +18,17 @@ func GetPageNotFoundError() types.ApiResponse {
 		Data: emptyData,
 	}
 }
+
+// GetCustomHTTPError function is to override echo custom errors
+func GetCustomHTTPError(ErrorStringEn string, ErrorStringFa string, StatusCode int) types.ApiResponse {
+	messages := map[string]types.MessageItem{
+		"general": types.MessageItem{EN:[]string{ErrorStringEn},FA:[]string{ErrorStringFa}},
+	}
+	emptyData := types.ResponseData{}
+	return types.ApiResponse{
+		Result: "ERROR",
+		StatusCode: StatusCode,
+		Messages: messages,
+		Data: emptyData,
+	}
+}
