@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	userscontroller "github.com/ajangi/gAuthService/app/controllers/users"
+	verificationcodecontroller "github.com/ajangi/gAuthService/app/controllers/verification"
 	"github.com/ajangi/gAuthService/app/utils/responses"
 	"github.com/labstack/echo"
 )
@@ -17,7 +17,7 @@ func main() {
 	e.HTTPErrorHandler = customHTTPErrorHandler
 	v1ApiGroup := e.Group("/api/v1")
 	usersGroup := v1ApiGroup.Group("/users")
-	usersGroup.POST("/getCode", userscontroller.GetVerificationCode)
+	usersGroup.POST("/getCode", verificationcodecontroller.GetVerificationCode)
 	e.Logger.Fatal(e.Start(":8020"))
 }
 
