@@ -23,6 +23,7 @@ func GetValidationErrors(err error) types.ErrorsList {
 		fmt.Println("type: ",err.Type())
 		fmt.Println("value: ", err.Value())
 		fmt.Println("param: ",err.Param())
+		fmt.Println("----------------------")
 	}
 	return els
 }

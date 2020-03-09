@@ -19,4 +19,6 @@ type ValidationFields map[string]ValidationField
 var Fields = ValidationFields{
 	"PhoneNumber": ValidationField{Fa: "موبایل", En: "Phone Number"},
 	"UserName": ValidationField{Fa: "نام کاربری", En: "Username"},
+	"Password": ValidationField{Fa: "رمز عبور", En: "Password"},
+	"ConfirmPassword": ValidationField{Fa: "تکرار رمز عبور", En: "Confirm Password"},
 }

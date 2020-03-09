@@ -3,7 +3,7 @@ package verificationcodecontroller
 import (
 	"net/http"
 
-	"github.com/ajangi/gAuthService/app/utils/types"
+	"github.com/ajangi/gAuthService/app/utils/requests"
 	"github.com/ajangi/gAuthService/app/utils/responses"
 	"github.com/ajangi/gAuthService/app/utils/services/validation"
 	"github.com/labstack/echo"
@@ -15,7 +15,7 @@ var validate *validator.Validate
 // GetVerificationCode is the main function for getting verification code
 func GetVerificationCode(c echo.Context) (err error) {
 	validate = validator.New()
-	request := new(types.GetCodeRequest)
+	request := new(requests.GetCodeRequest)
 	if err = c.Bind(request); err != nil {
 		return
 	}

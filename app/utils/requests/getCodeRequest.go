@@ -1,4 +1,4 @@
-package types
+package requests
 
 // GetCodeRequest is the object of getting code request object
 type GetCodeRequest struct {
