@@ -5,7 +5,7 @@ import (
 	"log"
 	"strings"
 
-	"github.com/ajangi/gAuthService/app/utils/config"
+	"github.com/ajangi/gAuthService/app/config"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"gopkg.in/go-playground/validator.v9"

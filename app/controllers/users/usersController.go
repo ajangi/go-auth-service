@@ -5,9 +5,9 @@ import (
 	"github.com/labstack/echo"
 	"gopkg.in/go-playground/validator.v9"
 	User "github.com/ajangi/gAuthService/app/models"
-	"github.com/ajangi/gAuthService/app/utils/requests"
-	"github.com/ajangi/gAuthService/app/utils/responses"
-	"github.com/ajangi/gAuthService/app/utils/services/validation"
+	"github.com/ajangi/gAuthService/app/types/requests"
+	"github.com/ajangi/gAuthService/app/types/responses"
+	"github.com/ajangi/gAuthService/app/services/validation"
 )
 
 var validate *validator.Validate

@@ -1,4 +1,4 @@
-package types
+package responses
 
 // APIResponse is the main response struct that should be returned in api
 type APIResponse struct {

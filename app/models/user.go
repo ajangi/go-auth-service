@@ -4,8 +4,8 @@ import (
 	"log"
 	"fmt"
 
-	"github.com/ajangi/gAuthService/app/utils/requests"
-	"github.com/ajangi/gAuthService/app/utils/config"
+	"github.com/ajangi/gAuthService/app/types/requests"
+	"github.com/ajangi/gAuthService/app/config"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )

@@ -3,7 +3,7 @@ package validation
 import (
 	"fmt"
 
-	"github.com/ajangi/gAuthService/app/utils/types"
+	"github.com/ajangi/gAuthService/app/types"
 	"github.com/ajangi/gAuthService/app/utils/translate"
 	"gopkg.in/go-playground/validator.v9"
 )

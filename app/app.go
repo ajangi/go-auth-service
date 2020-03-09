@@ -6,7 +6,7 @@ import (
 
 	userscontroller "github.com/ajangi/gAuthService/app/controllers/users"
 	verificationcodecontroller "github.com/ajangi/gAuthService/app/controllers/verification"
-	"github.com/ajangi/gAuthService/app/utils/responses"
+	"github.com/ajangi/gAuthService/app/types/responses"
 	"github.com/labstack/echo"
 )
 
