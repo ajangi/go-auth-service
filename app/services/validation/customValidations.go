@@ -1,7 +1,6 @@
 package validation
 
 import (
-	"fmt"
 	"log"
 	"strings"
 
@@ -21,9 +20,6 @@ func UniqueInDB(fl validator.FieldLevel) bool{
 	param := strings.Split(fl.Param(), `:`)
 	tableName := param[0]
 	columnName := param[1]
-	fmt.Println(tableName)
-	fmt.Println(columnName)
-	fmt.Println(fl.Field().String())
 	var count int
 	db.Table(tableName).Where(columnName+" = ?", fl.Field().String()).Count(&count)
 	if(count > 0){
