@@ -7,6 +7,7 @@ import (
 
 	"github.com/ajangi/gAuthService/app/config"
 	"github.com/jinzhu/gorm"
+	// using to connect to mysql database!
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"gopkg.in/go-playground/validator.v9"
 )
