@@ -4,16 +4,15 @@ import (
 	"log"
 	"strings"
 
-	"github.com/ajangi/gAuthService/app/config"
-	"github.com/jinzhu/gorm"
+	"github.com/ajangi/gAuthService/app/utils/db"
+	"github.com/ajangi/gAuthService/app/utils/env"
 	// using to connect to mysql database!
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"gopkg.in/go-playground/validator.v9"
 )
-var validate *validator.Validate
-// UniqueInDB is a custom validatation to check data is uniqueu in database
+// UniqueInDB is a custom validation to check data is unique in database
 func UniqueInDB(fl validator.FieldLevel) bool{
-	db, err := gorm.Open("mysql", config.DbConfig)
+	database, err := db.GetDB()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -21,9 +20,22 @@ func UniqueInDB(fl validator.FieldLevel) bool{
 	tableName := param[0]
 	columnName := param[1]
 	var count int
-	db.Table(tableName).Where(columnName+" = ?", fl.Field().String()).Count(&count)
-	if(count > 0){
+	query := database.Table(tableName).Where(columnName+" = ?", fl.Field().String())
+	res := query.Count(&count)
+	if res.Error != nil {
+		errorString := res.Error.Error()
+		if strings.Contains(errorString,getUniqInDbTableNotExistsError(tableName)) {
+			log.Println("------------------")
+			log.Println(res.Error.Error())
+			log.Println("------------------")
+		}
+	}
+	if count > 0 {
 		return false
 	}
 	return true
+}
+
+func getUniqInDbTableNotExistsError(tableName string) string {
+	return "Table '"+env.GetEnvVariable("DB_NAME")+"."+tableName+"' doesn't exist"
 }

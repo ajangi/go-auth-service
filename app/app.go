@@ -1,15 +1,14 @@
 package main
 
 import (
-	"net/http"
 	"fmt"
+	"net/http"
 
 	userscontroller "github.com/ajangi/gAuthService/app/controllers/users"
 	verificationcodecontroller "github.com/ajangi/gAuthService/app/controllers/verification"
 	"github.com/ajangi/gAuthService/app/types/responses"
 	"github.com/labstack/echo"
 )
-
 func main() {
 	echo.NotFoundHandler = func(c echo.Context) error {
 		errorResponse := responses.GetPageNotFoundError()
@@ -39,7 +38,7 @@ func customHTTPErrorHandler(err error, c echo.Context) {
 		ErrorFa = err.Error()
 	}
 	errorResponse := responses.GetCustomHTTPError(ErrorEn, ErrorFa, code)
-	if err := c.JSON(code, errorResponse); err != nil {
+	if err = c.JSON(code, errorResponse); err != nil {
 		c.Logger().Error(err)
 	}
 	c.Logger().Error(err)

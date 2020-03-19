@@ -8,6 +8,7 @@ import (
 	"gopkg.in/go-playground/validator.v9"
 )
 
+var validate *validator.Validate
 // GetValidationErrors is a function to get validation errors
 func GetValidationErrors(err error) types.ErrorsList {
 	els := types.ErrorsList{}
@@ -26,11 +27,5 @@ func GetValidationErrors(err error) types.ErrorsList {
 		fmt.Println("----------------------")
 	}
 	return els
-}
-
-
-// ValidateGetCodeRequest is a function that validates get code request
-func ValidateGetCodeRequest(){
-
 }
 

@@ -18,23 +18,23 @@ func GetValidationMessage(err validator.FieldError) (VFMessage ValidationFieldMe
 		message = ValidationFieldMessage{Fa: validationField.Fa + " باید دارای " + err.Param() + " کاراکتر باشد", En: validationField.En + " should have " + err.Param() + " characters"}
 	case "required_without":
 		params := strings.Split(err.Param(), " ")
-		paramsTranslatations := map[int]ValidationField{}
+		paramsTranslations := map[int]ValidationField{}
 		for i, param := range params {
-			paramsTranslatations[i] = Fields[param]
+			paramsTranslations[i] = Fields[param]
 		}
 		FaString := validationField.Fa + " در صورت عدم ارسال "
 		EnString := validationField.En + " is required if "
-		for i, translated := range paramsTranslatations {
+		for i, translated := range paramsTranslations {
 			FaString = FaString + "(" + translated.Fa + ")"
 			EnString = EnString + "(" + translated.En + ")"
-			if i < (len(paramsTranslatations) - 1) {
+			if i < (len(paramsTranslations) - 1) {
 				FaString = FaString + " و "
 				EnString = EnString + ", "
 			}
 		}
 		FaString = FaString + " الزامی است"
 		EnString = EnString + " is not present"
-		fmt.Println(paramsTranslatations)
+		fmt.Println(paramsTranslations)
 		message = ValidationFieldMessage{Fa: FaString, En: EnString}
 	case "uniqueInDB":
 		FaString := validationField.Fa + " قبلا استفاده شده است"

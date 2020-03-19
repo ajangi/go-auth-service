@@ -1,13 +1,13 @@
 package userscontroller
 
 import (
-	"net/http"
-	"github.com/labstack/echo"
-	"gopkg.in/go-playground/validator.v9"
 	User "github.com/ajangi/gAuthService/app/models"
+	"github.com/ajangi/gAuthService/app/services/validation"
 	"github.com/ajangi/gAuthService/app/types/requests"
 	"github.com/ajangi/gAuthService/app/types/responses"
-	"github.com/ajangi/gAuthService/app/services/validation"
+	"github.com/labstack/echo"
+	"gopkg.in/go-playground/validator.v9"
+	"net/http"
 )
 
 var validate *validator.Validate
@@ -15,7 +15,10 @@ var validate *validator.Validate
 // RegisterUser is the method that gets user register request and registers user or returns error response
 func RegisterUser(c echo.Context) (err error)  {
 	validate = validator.New()
-	validate.RegisterValidation("uniqueInDB", validation.UniqueInDB)
+	err = validate.RegisterValidation("uniqueInDB", validation.UniqueInDB)
+	if err != nil {
+		return
+	}
 	request := new(requests.RegisterUserRequest)
 	if err = c.Bind(request); err != nil {
 		return
