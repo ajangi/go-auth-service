@@ -19,6 +19,34 @@ func GetPageNotFoundError() APIResponse {
 	}
 }
 
+// GetUserNotFoundError function is to export user not found error response
+func GetUserNotFoundError() APIResponse {
+	messages := map[string]MessageItem{
+		"user": MessageItem{EN:[]string{"User Not Found!"},FA:[]string{"کاربری با این مشخصات یافت نشد بافت نشد."}},
+	}
+	emptyData := ResponseData{}
+	return APIResponse{
+		Result: "ERROR",
+		StatusCode: http.StatusNotFound,
+		Messages: messages,
+		Data: emptyData,
+	}
+}
+
+
+// GetInternalServiceError function is to export internal server error response
+func GetInternalServiceError() APIResponse {
+	messages := map[string]MessageItem{
+		"general": MessageItem{EN:[]string{"Internal Server Error!"},FA:[]string{"متاسفانه مشکلی در سرور رخ داده است."}},
+	}
+	emptyData := ResponseData{}
+	return APIResponse{
+		Result: "ERROR",
+		StatusCode: http.StatusInternalServerError,
+		Messages: messages,
+		Data: emptyData,
+	}
+}
 // GetCustomHTTPError function is to override echo custom errors
 func GetCustomHTTPError(ErrorStringEn string, ErrorStringFa string, StatusCode int) APIResponse {
 	messages := map[string]MessageItem{

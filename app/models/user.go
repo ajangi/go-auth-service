@@ -23,11 +23,10 @@ type User struct {
 	UserName    string     `gorm:"column:username;default:null;type:varchar(255);unique;" json:"username"`
 	Password    string     `gorm:"column:password;default:null;type:varchar(255);" json:"password"`
 	Status      userStatus `gorm:"column:status;type:varchar(25);default:'active'" json:"status"`
-	//CreatedAt   time.Time
 }
 
 // Migrate is the method to make user model migration
-func migrate() {
+func (User) migrate() {
 	database, err := db.GetDB()
 	if err != nil {
 		log.Panic(err)
@@ -42,7 +41,6 @@ func (User) TableName() string {
 }
 
 // CreateUser is to create user
-// Exports User model
 func CreateUser(req *requests.RegisterUserRequest) (User,error) {
 	var user = User{
 		FirstName: req.FirstName,
@@ -53,7 +51,7 @@ func CreateUser(req *requests.RegisterUserRequest) (User,error) {
 		Password: req.Password,
 	}
 	database, err := db.GetDB()
-	db.MigrateTable("users",migrate)
+	db.MigrateTable(user.TableName(),user.migrate)
 	if err != nil {
 		log.Panic(err)
 		return user,err
